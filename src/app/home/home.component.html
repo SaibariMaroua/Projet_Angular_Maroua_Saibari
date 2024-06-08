@@ -1,0 +1,162 @@
+
+<div class="background-video-container">
+  <app-header></app-header>
+  <video autoplay muted loop>
+    <source src="/assets/video/video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div class="container">
+    <br><br><br><br>
+    <p class="welcome-message">
+      Hello {{ user?.firstName }} {{ user?.lastName }} on
+      <img src="/assets/icone/cerato-1.png" alt="Icon" class="menu-icon" style="width: 400px;">
+    </p>
+       <div class="hero"></div>
+   <!--    <div class="robot-parts-cta">
+         Affichage de l'image actuelle 
+        <div class="image-container">
+          <button (click)="prevImage()" class="btn btn-primary navigation-button-left"> <i class="fas fa-chevron-left"></i></button>
+          <img [src]="images[currentIndex].url" [alt]="images[currentIndex].description" class="part-img" />
+          <button (click)="nextImage()" class="btn btn-primary navigation-button-right"> <i class="fas fa-chevron-right"></i></button>
+          <div class="part-title">{{ images[currentIndex].description }}</div>
+        </div>
+      </div>-->
+      
+
+      <div class="robot-parts-cta">
+        <button (click)="prevPart()" class="navigation-button transparent-button"><i class="fas fa-chevron-left"></i></button>  <a [routerLink]="['/catalog']" [queryParams]="{filter: parts[currentIndex]}" class="part small">
+          <br>
+          <img [src]="imageUrls[parts[currentIndex]].url" [alt]="imageUrls[parts[currentIndex]].title" />
+          <div>{{ imageUrls[parts[currentIndex]].title }}</div>
+        </a>
+        <button (click)="nextPart()" class="navigation-button transparent-button"><i class="fas fa-chevron-right"></i></button>
+       </div>
+      
+      
+  </div>
+  <br>
+<!-- Description d'ElectroHive -->
+<div class="color-zone">
+<div class="container">
+    <br><br><br><br>
+    <h2 class="text-center" style="font-size: 60px;">Welcome to ElectroHive</h2>
+    <p class="text-center" style="font-size: 35px;">
+        Discover our wide selection of electronic devices, including smartphones, tablets, and smart TVs. At ElectroHive, we are committed to providing our customers with the latest technology at the best prices.
+    </p>
+    <p class="text-center" style="font-size: 30px;">
+        Explore our catalog today and find the perfect devices to meet your technological needs.
+    </p>
+    
+<br><br><br>
+    <!-- Informations supplémentaires -->
+    <div class="row justify-content-around">
+        <div class="col-md-3 text-center">
+            <i class="fas fa-shipping-fast fa-3x"></i>
+            <h4>Free Shipping & Returns</h4>
+            <p style="font-size: 20px;">For all orders over 500 Dh</p>
+        </div>
+        <div class="col-md-3 text-center">
+            <i class="fas fa-handshake fa-3x"></i>
+            <h4>Customer Protection</h4>
+            <p style="font-size: 20px;">From order to delivery</p>
+        </div>
+        <div class="col-md-3 text-center">
+            <i class="fas fa-lock fa-3x"></i>
+            <h4>Secure Payment</h4>
+            <p style="font-size: 20px;">Use the world's most secure payment methods</p>
+        </div>
+        <div class="col-md-3 text-center">
+            <i class="fas fa-headset fa-3x"></i>
+            <h4>24/7 Support</h4>
+            <p style="font-size: 20px;">We answer your questions anytime</p>
+           
+        </div>
+    </div>
+    
+    <div class="d-flex justify-content-center">
+        <a href="https://www.facebook.com/" class="mx-2"><span class="badge badge-primary"><i class="fab fa-facebook-f fa-2x"></i></span></a>
+        <a href="https://www.instagram.com/" class="mx-2"><span class="badge badge-danger mx-2"><i class="fab fa-instagram fa-2x"></i></span></a>
+        <a href="https://web.whatsapp.com/" class="mx-2"><span class="badge badge-success"><i class="far fa-comments fa-2x"></i></span></a>
+    </div>
+   
+    
+</div>
+ 
+  </div>
+
+
+  <footer class="text-center text-lg-start text-white" style="background-color: #45526e; padding-top: 20px; padding-bottom: 20px;">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+        <!-- Section: Links -->
+        <section class="">
+            <!--Grid row-->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-1">
+                    <h6 class="text-uppercase mb-3 font-weight-bold">ElectroHive</h6>
+                    <p class="p-2">Welcome to ElectroHive, your one-stop destination for all your electronic needs. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-1">
+                    <h6 class="text-uppercase mb-3 font-weight-bold">Products</h6>
+                    <p class="p-2"><a href="#" class="text-white">Smartphones</a></p>
+                    <p class="p-2"><a href="#" class="text-white">Laptops</a></p>
+                    <p class="p-2"><a href="#" class="text-white">Televisions</a></p>
+                    <p class="p-2"><a href="#" class="text-white">Accessories</a></p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-1">
+                    <h6 class="text-uppercase mb-3 font-weight-bold">Useful links</h6>
+                    <p class="p-2"><a href="#" class="text-white">Your Account</a></p>
+                    <p class="p-2"><a href="#" class="text-white">Track Orders</a></p>
+                    <p class="p-2"><a href="#" class="text-white">Shipping Information</a></p>
+                    <p class="p-2"><a href="#" class="text-white">Customer Service</a></p>
+                </div>
+
+                <!-- Grid column -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-1">
+                    <h6 class="text-uppercase mb-3 font-weight-bold">Contact</h6>
+                    <p class="p-2"><i class="fas fa-home mr-2"></i> Maroc, MA 10012, MS</p>
+                    <p class="p-2"><i class="fas fa-envelope mr-2"></i> info&commat;electrohive.com</p>
+                    <p class="p-2"><i class="fas fa-phone mr-2"></i> +212 234 567 88</p>
+                    <p class="p-2"><i class="fas fa-print mr-2"></i> +212 234 567 89</p>
+                </div>
+                <!-- Grid column -->
+            </div>
+            <!--Grid row-->
+        </section>
+        <!-- Section: Links -->
+    </div>
+    <!-- Grid container -->
+    <hr class="my-3">
+    <!-- Section: Copyright -->
+    <section class="p-3 pt-0">
+        <div class="row d-flex align-items-center">
+            <!-- Grid column -->
+            <div class="col-md-7 col-lg-8 text-center text-md-start">
+                <!-- Copyright -->
+                <div class="p-3">
+                    © 2024 ElectroHive. All rights reserved. <br>Designed and developed by <a href="https://yourwebsite.com" class="text-white">Your Company</a>
+                </div>
+                <!-- Copyright -->
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+                <!-- Social media links -->
+                <a href="#" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-google"></i></a>
+                <a href="#" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-instagram"></i></a>
+            </div>
+            <!-- Grid column -->
+        </div>
+    </section>
+    <!-- Section: Copyright -->
+</footer>

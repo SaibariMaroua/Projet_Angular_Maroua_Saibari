@@ -1,0 +1,185 @@
+<!-- product-details-component.component.html -->
+<app-header></app-header>
+<br><br><br><br><br><br>
+<div *ngIf="product" class="product-details">
+ 
+  <div class="product-info">
+    <div class="product-image">
+      <img [src]="product.imagePath" alt="{{ product.name }}">
+      <h2>{{ product.name }}</h2>
+    </div>
+    
+    <div class="product-description">
+      <h5 class="card-title">{{ product.name }}</h5>
+      <p class="card-text">{{ product.title }}</p>
+      <p>{{ product.details }}</p>
+      <p class="card-text" style="font-weight: bold">{{ product.price | currency:"":"" }} DH</p>
+      <p style="font-weight: bold">Quantity: {{ product.quantity }}</p>
+    
+      <button class="btn btn-primary" (click)="addToCart(product)" *ngIf="user">
+        <i class="fas fa-shopping-cart"></i> Add to Cart
+      </button>
+      <button class="btn btn-primary" *ngIf="!user" [routerLink]="'/signin'">
+        <i class="fas fa-sign-in-alt"></i> Sign in to Add to Cart
+      </button>
+      
+      <button class="btn btn-primary" [routerLink]="'/catalog'">
+        <i class="fas fa-eye"></i>
+        Show Less
+      </button>
+      
+      <button *ngIf="user && user.userType === 'Admin'" class="btn btn-danger" (click)="deleteProduct(product)">
+        <i class="fas fa-trash-alt"></i> Delete Product
+      </button>
+      <button *ngIf="user && user.userType === 'Admin'" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editProductModal" (click)="selectProduct(product)">
+        <i class="fas fa-edit"></i> Edit Product
+      </button>
+    </div>
+  </div>
+  <div class="rating">
+    <span class="star" [ngClass]="{'filled': i < product.rating}" *ngFor="let i of [1, 2, 3, 4, 5]" (click)="rateProduct(product, i)">&#9733;</span>
+  </div>
+  <a href="https://www.facebook.com/"><span class="badge badge-primary"><i class="fab fa-facebook-f fa-2x"></i></span></a>
+  <a href="https://www.instagram.com/"><span class="badge badge-danger mx-2"><i class="fab fa-instagram fa-2x"></i></span></a>
+  <a href="https://web.whatsapp.com/"><span class="badge badge-success"><i class="far fa-comments fa-2x"></i></span></a>
+  
+  
+   <!-- Zone de commentaire -->
+   <div class="comment-section">
+    <h3>Comments</h3>
+    <!-- Ajouter une liste de commentaires ici -->
+    <textarea rows="4" cols="50" placeholder="Add a comment..."></textarea>
+    <button class="btn btn-primary">Submit</button>
+    <span class="badge badge-primary"><i class="fa fa-user"></i> 900 Followers</span>
+    <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
+    <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>
+
+  </div>
+  <!-- Modal for editing the product -->
+  <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+        </div>
+        <div class="modal-body">
+          <form *ngIf="selectedProduct" (submit)="editProduct() ">
+            <div class="form-group">
+              <label for="editName">Name</label>
+              <input type="text" class="form-control" id="editName" [(ngModel)]="selectedProduct.name" name="editName" required>
+            </div>
+            <div class="form-group">
+              <label for="editTitle">Title</label>
+              <input type="text" class="form-control" id="editTitle" [(ngModel)]="selectedProduct.title" name="editTitle" required>
+            </div>
+            <div class="form-group">
+              <label for="editQuantity">Quantity</label>
+              <input type="number" class="form-control" id="editQuantity" [(ngModel)]="selectedProduct.quantity" name="editQuantity" required>
+            </div>
+            <div class="form-group">
+              <label for="editPrice">Price</label>
+              <input type="number" class="form-control" id="editPrice" [(ngModel)]="selectedProduct.price" name="editPrice" required>
+            </div>
+            <div class="form-group">
+              <label for="editCategory">Category</label>
+              <input type="text" class="form-control" id="editCategory" [(ngModel)]="selectedProduct.category" name="editCategory" required>
+            </div>
+            <div class="form-group">
+              <label for="editDetails">Details</label>
+              <textarea class="form-control" id="editDetails" [(ngModel)]="selectedProduct.details" name="editDetails" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="editImagePath">Image Path</label>
+              <input type="text" class="form-control" id="editImagePath" [(ngModel)]="selectedProduct.imagePath" name="editImagePath" required>
+            </div>
+            <div class="form-group">
+              <label for="editRating">Rating</label>
+              <input type="number" class="form-control" id="editRating" [(ngModel)]="selectedProduct.rating" name="editRating" required>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+  
+          </div>
+          
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="text-center text-lg-start text-white" style="background-color: #45526e; padding-top: 20px; padding-bottom: 20px;">
+  <!-- Grid container -->
+  <div class="container p-4 pb-0">
+      <!-- Section: Links -->
+      <section class="">
+          <!--Grid row-->
+          <div class="row">
+              <!-- Grid column -->
+              <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-1">
+                  <h6 class="text-uppercase mb-3 font-weight-bold">ElectroHive</h6>
+                  <p class="p-2">Welcome to ElectroHive, your one-stop destination for all your electronic needs. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-1">
+                  <h6 class="text-uppercase mb-3 font-weight-bold">Products</h6>
+                  <p class="p-2"><a href="#" class="text-white">Smartphones</a></p>
+                  <p class="p-2"><a href="#" class="text-white">Laptops</a></p>
+                  <p class="p-2"><a href="#" class="text-white">Televisions</a></p>
+                  <p class="p-2"><a href="#" class="text-white">Accessories</a></p>
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-1">
+                  <h6 class="text-uppercase mb-3 font-weight-bold">Useful links</h6>
+                  <p class="p-2"><a href="#" class="text-white">Your Account</a></p>
+                  <p class="p-2"><a href="#" class="text-white">Track Orders</a></p>
+                  <p class="p-2"><a href="#" class="text-white">Shipping Information</a></p>
+                  <p class="p-2"><a href="#" class="text-white">Customer Service</a></p>
+              </div>
+
+              <!-- Grid column -->
+              <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-1">
+                  <h6 class="text-uppercase mb-3 font-weight-bold">Contact</h6>
+                  <p class="p-2"><i class="fas fa-home mr-2"></i> Maroc, MA 10012, MS</p>
+                  <p class="p-2"><i class="fas fa-envelope mr-2"></i> info&commat;electrohive.com</p>
+                  <p class="p-2"><i class="fas fa-phone mr-2"></i> +212 234 567 88</p>
+                  <p class="p-2"><i class="fas fa-print mr-2"></i> +212 234 567 89</p>
+              </div>
+              <!-- Grid column -->
+          </div>
+          <!--Grid row-->
+      </section>
+      <!-- Section: Links -->
+  </div>
+  <!-- Grid container -->
+  <hr class="my-3">
+  <!-- Section: Copyright -->
+  <section class="p-3 pt-0">
+      <div class="row d-flex align-items-center">
+          <!-- Grid column -->
+          <div class="col-md-7 col-lg-8 text-center text-md-start">
+              <!-- Copyright -->
+              <div class="p-3">
+                  © 2024 ElectroHive. All rights reserved. <br>Designed and developed by <a href="https://yourwebsite.com" class="text-white">Your Company</a>
+              </div>
+              <!-- Copyright -->
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+              <!-- Social media links -->
+              <a href="#" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-google"></i></a>
+              <a href="#" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-instagram"></i></a>
+          </div>
+          <!-- Grid column -->
+      </div>
+  </section>
+  <!-- Section: Copyright -->
+</footer>

@@ -1,0 +1,113 @@
+<header>
+    <nav class="navbar">
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="#" i18n>
+                    <img src="/assets/icone/cerato-1.png" alt="Icon" class="menu-icon">
+                </a>
+            </li>
+            <li class="nav-item"><a href="/home" i18n><i class="fas fa-home"></i> Home</a></li>
+            <li class="nav-item"><a href="/cart" i18n><i class="fas fa-shopping-cart"></i> Cart</a></li>
+            <li class="nav-item"><a href="/catalog" i18n> <i class="fas fa-book"></i> Catalog</a></li>
+            <!--li class="nav-item" *ngIf="user && user.userType === 'Admin'"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProduct">
+              <i class="fas fa-plus"></i> Create Product
+          </button>
+          </li-->
+          <li class="nav-item">
+                <form class="search-form">
+                    <div class="search-input">
+                        <input type="text" [(ngModel)]="searchCategory" name="searchCategory" placeholder="Search category...">
+                        <input type="text" [(ngModel)]="searchDetails" name="searchDetails" placeholder="Search details...">
+                        <button type="button" (click)="searchProducts()">  <i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+            </li>
+        </ul>
+
+        <ul class="nav-menu right">
+            <li class="nav-item" *ngIf="(user)">
+                <a href="#" (click)="signOut()">
+                    <i class="fas fa-sign-out-alt">  Logout</i> <!-- Remplacez l'icône par celle que vous préférez -->
+                </a>
+            </li>
+
+            <!-- Condition pour afficher le lien de connexion ou le profil utilisateur -->
+            <ng-container *ngIf="user; else signinLink">
+                <!-- Si l'utilisateur est connecté -->
+                <li class="nav-item">
+                    <a *ngIf="user.userType === 'Admin'" href="/admin" class="profile-link nav-item" (click)="toggleSignOutMenu()">
+                        <img src="/assets/signin/profile.png" class="logo" alt="Profile" i18n-alt/>
+                    </a>
+                    <a *ngIf="user.userType !== 'Admin'" href="/profile" class="profile-link nav-item" (click)="toggleSignOutMenu()">
+                        <div class="profile-initials">
+                          {{ getInitials(user.firstName, user.lastName) }}
+                        </div>
+                      </a>
+                      
+                    
+                </li>
+            </ng-container>
+            <ng-template #signinLink>
+                <!-- Si l'utilisateur n'est pas connecté -->
+                <li class="nav-item">
+                    <a routerLink="/signin" i18n><i class="fas fa-sign-in-alt"></i> Signin</a>
+                </li>
+            </ng-template>
+            <!-- Fin de la condition -->
+            
+            <li class="nav-item" *ngIf="!(user)"><a href="/signin" i18n> <i class="fas fa-key"></i> Register</a></li>
+        </ul>
+    </nav>
+</header>
+<!-- Modal -->
+<div class="modal fade" id="addProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form (submit)="addProduct( name?.value ?? '', title?.value ?? '', quantity && +quantity.value || 0, price && +price.value || 0, category?.value ?? '', details?.value ?? '', imagePath?.value ?? '', rating && +rating.value || 0)">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" #name required>
+                </div>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" #title required>
+                </div>
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Quantity</label>
+                    <input type="number" class="form-control" id="quantity" #quantity required>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="number" class="form-control" id="price" #price required>
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <input type="text" class="form-control" id="category" #category required>
+                </div>
+                <div class="mb-3">
+                    <label for="details" class="form-label">Details</label>
+                    <textarea class="form-control" id="details" #details required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="imagePath" class="form-label">Image Path</label>
+                    <input type="text" class="form-control" id="imagePath" #imagePath required>
+                </div>
+                <div class="mb-3">
+                    <label for="rating" class="form-label">Rating</label>
+                    <input type="number" class="form-control" id="rating" #rating required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" href="/catalog">Add Product</button>
+                </div>
+            </form>
+          </div>
+      </div>
+  </div>
+</div>
+<br>

@@ -1,0 +1,304 @@
+<!--p>profile-client works!</p>
+<div>
+    <h2>Profil Utilisateur</h2>
+    <div *ngIf="user">
+        <h2>Informations Personnelles</h2>
+        <p>Nom: {{ user.firstName }} {{ user.lastName }}</p>
+        <p>Email: {{ user.email }}</p>
+      
+      </div>
+      
+    
+    
+    <h3>Modifier le Profil</h3>
+    <form>
+    
+      <button type="submit">Enregistrer les Modifications</button>
+    </form>
+
+    <h3>Changer le Mot de Passe</h3>
+    <form>
+    
+      <button type="submit">Changer le Mot de Passe</button>
+    </form>
+    
+
+    <h3>Historique des Commandes</h3>
+  
+  </div-->
+  
+<br>
+  <div class="container">
+    <div class="row">
+            <div class="col-lg-4">
+               <div class="profile-card-4 z-depth-3">
+                <div class="card">
+                  <div class="card-body text-center bg-primary rounded-top">
+                    <div class="user-box" *ngIf="user">
+                        <div class="initials">
+                            {{ user.firstName ? user.firstName.charAt(0) : '' }}{{ user.lastName ? user.lastName.charAt(0) : '' }}
+                        </div>
+                    </div>
+                    
+                  <div *ngIf="user">
+                     <h3> <i class="fas fa-user"></i> Informations Personnelles</h3>
+                 
+                 <br>
+                    <!-- Ajoutez d'autres informations de l'utilisateur ici si nécessaire -->
+                    <h4 class="mb-1 text-white">{{ user.firstName }} {{ user.lastName }}</h4>
+                   
+                </div>
+                
+                 </div>
+                  <div class="card-body">
+                    <ul class="list-group shadow-none">
+                    <li class="list-group-item">
+                      <div class="list-icon">
+                        <i class="fa fa-phone-square"></i>
+                      </div>
+                      <div class="list-details" *ngIf="user">
+                        <span><h5>{{ user.tel }}</h5></span>
+                        <small>Mobile Number</small>
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="list-icon">
+                        <i class="fa fa-envelope"></i>
+                      </div>
+                      <div class="list-details" *ngIf="user">
+                        <span><h5>{{ user.email }}</h5></span>
+                        <small>Email Address</small>
+                      </div>
+                    </li>
+                 
+                    </ul>
+                    <div class="row text-center mt-4">
+                      <div class="col p-2">
+                       <h4 class="mb-1 line-height-5"><i class="fas fa-home"></i></h4>
+                        <small class="mb-0 font-weight-bold"><h5><a class="nav-link" href="/home"> Home</a></h5></small>
+                       
+                       </div>
+                        <div class="col p-2">
+                          <h4 class="mb-1 line-height-5"><i class="fas fa-shopping-cart"></i></h4>
+                         <small class="mb-0 font-weight-bold"><h5><a class="nav-link" href="/cart"> Cart </a></h5></small>
+                        </div>
+                     
+                        <div class="col p-2">
+                         <h4 class="mb-1 line-height-5"><i class="fas fa-sign-out-alt"></i> </h4>
+                         <small class="mb-0 font-weight-bold"><h5><a class="nav-link" href="#" (click)="signOut()">Logout</a></h5></small>
+                        </div>
+                       
+                     </div>
+                   </div>
+                   <div class="card-footer text-center">
+                     <a href="javascript:void()" class="btn-social btn-facebook waves-effect waves-light m-1"><i class="fa fa-facebook"></i></a>
+                     <a href="javascript:void()" class="btn-social btn-google-plus waves-effect waves-light m-1"><i class="fa fa-google-plus"></i></a>
+                     <a href="javascript:void()" class="list-inline-item btn-social btn-behance waves-effect waves-light"><i class="fa fa-behance"></i></a>
+                     <a href="javascript:void()" class="list-inline-item btn-social btn-dribbble waves-effect waves-light"><i class="fa fa-dribbble"></i></a>
+                   </div>
+                 </div>
+               </div>
+            </div>
+            <div class="col-lg-8">
+               <div class="card z-depth-3">
+                <div class="card-body">
+                  <ul class="nav nav-pills nav-pills-primary nav-justified">
+                    <li class="nav-item">
+                      <a (click)="currentTab = 'profile'" [class.active]="currentTab === 'profile'" data-target="#profile" data-toggle="pill" class="nav-link"><i class="fas fa-list"></i>  <span class="hidden-xs">Orders</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a (click)="currentTab = 'messages'" [class.active]="currentTab === 'messages'" data-target="#messages" data-toggle="pill" class="nav-link"><i class="fas fa-bell"></i>  <span class="hidden-xs">Notifications</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a (click)="currentTab = 'edit'" [class.active]="currentTab === 'edit'" data-target="#edit" data-toggle="pill" class="nav-link"><i class="fas fa-pencil-alt"></i>  <span class="hidden-xs">Edit</span></a>
+                    </li>
+                  </ul>
+                  <ng-template #content let-modal>
+                    <div class="modal-header">
+                      <h4 class="modal-title">Modifier le Profil</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <!-- Ajoutez ici les champs de saisie pour modifier le profil -->
+                      <form>
+                        <!-- Ajoutez les champs de saisie pour modifier le profil ici -->
+                        <button type="submit" class="btn btn-primary">Enregistrer les Modifications</button>
+                      </form>
+                    </div>
+                  </ng-template>
+                    
+                <div class="tab-content p-3">
+                      
+                    <div *ngIf="currentTab === 'profile'"class="tab-pane active show" id="profile">
+                        <h5 class="mb-3">Command</h5>
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Produits</th>
+                                <th>Date</th>
+                                <th>Total</th>
+                                <th>Adresse de livraison</th>
+                                <th>Status</th>
+                                <th>Notification</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <ng-container *ngFor="let commande of orders">
+                                
+                                <tr>
+                                  <td>
+                                    <ul>
+                                      <li *ngFor="let produit of commande.produits">
+                                        {{ produit.name }}, {{ produit.price }} DH
+                                      </li>
+                                    </ul>
+                                  </td>
+                                  <td>{{ commande.date | date }}</td>
+                                  <td>{{ commande.total }}</td>
+                                  <td>
+                                    <span *ngIf="commande.address">
+                                      {{ commande.address.street }}, {{ commande.address.city }}, {{ commande.address.state }} {{ commande.address.zip }}, {{ commande.address.country }}
+                                    </span>
+                                  </td>
+                                  <td>{{ commande.status }}</td>
+                                  <td>
+          <div *ngIf="commande.status === 'Pending'" class="alert alert-info" role="alert">
+            En attente de confirmation
+          </div>
+          <div *ngIf="commande.status === 'Accepted'" class="alert alert-success" role="alert">
+            Commande acceptée
+          </div>
+          <div *ngIf="commande.status === 'Rejected'" class="alert alert-danger" role="alert">
+            Commande refusée
+          </div>
+        </td>
+                                </tr>
+                              </ng-container>
+                            </tbody>
+                          </table>
+                          
+                          
+                        <div class="row">
+                        
+                            <div class="col-md-6">
+                               
+            
+                                <hr>
+                                <span class="badge badge-primary"><i class="fa fa-user"></i> 900 Followers</span>
+                                <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
+                                <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>
+                            </div>
+                            <div class="col-md-12">
+                                <h5 class="mt-2 mb-3"><span class="fa fa-clock-o ion-clock float-right"></span> Recent Activity</h5>
+                                <table class="table table-hover table-striped">
+                                    <tbody>                                    
+                                        <tr>
+                                            <td>
+                                                <strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Kensington</strong> deleted MyBoard3 in <strong>`Discussions`</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Skell</strong> deleted his post Look at Why this is.. in <strong>`Discussions`</strong>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--/row-->
+                    </div>
+                 
+                    <div *ngIf="currentTab === 'messages'" class="tab-pane active show" id="messages">
+                      <div *ngFor="let commande of orders">
+                        <div *ngIf="commande.status === 'Pending' && !commande.messageSeen" class="alert alert-info alert-dismissible fade show" role="alert">
+                            En attente de confirmation pour la commande :
+                            <ul>
+                                <li *ngFor="let produit of commande.produits">
+                                    {{ produit.name }}, {{ produit.price }} DH
+                                </li>
+                            </ul>
+                            <button type="button" class="btn-close" (click)="hideMessage(commande)" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <div *ngIf="commande.status === 'Accepted' && !commande.messageSeen" class="alert alert-success alert-dismissible fade show" role="alert">
+                            Commande acceptée :
+                            <ul>
+                                <li *ngFor="let produit of commande.produits">
+                                    {{ produit.name }}, {{ produit.price }} DH
+                                </li>
+                            </ul>
+                            <button type="button" class="btn-close" (click)="hideMessage(commande)" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <div *ngIf="commande.status === 'Rejected' && !commande.messageSeen" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            Commande refusée :
+                            <ul>
+                                <li *ngFor="let produit of commande.produits">
+                                    {{ produit.name }}, {{ produit.price }} DH
+                                </li>
+                            </ul>
+                            <button type="button" class="btn-close" (click)="hideMessage(commande)" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                    
+                  </div>
+
+                  <!-- Modifier -->
+                  <div *ngIf="user">
+                  <div *ngIf="currentTab === 'edit'" class="tab-pane" id="edit">
+                      <!-- Contenu à afficher lorsque vous cliquez sur "Edit" -->
+                      <!-- Ajoutez ici les champs de saisie pour modifier le profil -->
+                      <form>
+                        <div class="form-group">
+                            <label for="firstName">Prénom</label>
+                            <input type="text" class="form-control" id="firstName" [(ngModel)]="user.firstName" name="firstName">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Nom de famille</label>
+                            <input type="text" class="form-control" id="lastName" [(ngModel)]="user.lastName" name="lastName">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" class="form-control" id="password" [(ngModel)]="user.password" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="tel">Téléphone</label>
+                            <input type="tel" class="form-control" id="tel" [(ngModel)]="user.tel" name="tel">
+                        </div>
+                        <!-- Ajoutez d'autres champs d'entrée pour les autres propriétés ici -->
+                        
+                        <button type="submit" class="btn btn-primary">Enregistrer les Modifications</button>
+                    </form>
+                    
+                  </div>
+                </div>
+                </div>
+                        
+
+                       
+            </div>
+          </div>
+          </div>
+            
+        </div>
+    </div>

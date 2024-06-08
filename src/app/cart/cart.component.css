@@ -1,0 +1,62 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    background: #eecda3;
+    background: -webkit-linear-gradient(to right, #eecda3, #ef629f);
+    background: linear-gradient(to right, #eecda3, #ef629f);
+    min-height: 100vh;
+  }
+  
+  .header {
+    align-self: center;
+  }
+  
+ /* Effet de survol pour l'icône de suppression */
+.delete-icon:hover {
+  transform: scale(1.2); /* Agrandit l'icône au survol */
+  color: red;
+}
+
+.menu-icon {
+
+  margin-left: none;
+  margin-right: 2px; /* Ajoute un espacement à droite de l'image */
+  width: 200px; /* Ajuste la largeur de l'image selon vos besoins */
+  height: 60px; /* Permet à la hauteur de l'image de s'ajuster automatiquement en conservant les proportions */
+}
+
+/* styles.css ou votre fichier de styles principal */
+
+app-header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Assure que le header reste au-dessus de tout le contenu */
+}
+
+.content-container {
+  padding-top: 80px; /* Ajustez cette valeur en fonction de la hauteur de votre header */
+}
+.alert {
+  padding: 15px;
+  margin-top: 15px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.d-flex {
+  justify-content: center; /* Centre horizontalement le contenu */
+}
+
+
+.credit-card-image {
+  width: 100px; /* Taille des images */
+  margin: 0 7px; /* Ajoute une marge horizontale de 10 pixels entre les images */
+}

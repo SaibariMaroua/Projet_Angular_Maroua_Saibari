@@ -1,0 +1,340 @@
+/* catalog-component.component.css */
+
+.products-title {
+  font-size: 24px; /* Taille de police */
+  font-weight: bold; /* Gras */
+  color: #333; /* Couleur du texte */
+  text-align: center; /* Alignement du texte */
+  margin-bottom: 20px; /* Marge en bas */
+}
+
+.products {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.product-item {
+  display: inline-block;
+  width: 30%; /* Ajustez la largeur selon vos besoins */
+  margin: 0 15px 30px;
+}
+
+.product {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.product img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.product-details {
+  display: flex;
+  align-items: center;
+}
+
+.product-info {
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.product .name h3,
+.product .title h3 {
+  margin: 0;
+}
+
+.product .price {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.product .cta {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* Style pour les produits avec un faible stock */
+.low-stock {
+  border-color: red; /* Couleur de bordure rouge pour les produits avec un faible stock */
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* Ajoute une ombre rouge pour mettre en évidence */
+  font-weight: bold;
+}
+
+
+/* Style pour le bouton "Voir Plus/Moins" */
+.more-details-cta {
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+}
+
+/* Style pour la description des produits */
+.description {
+  margin-top: 10px;
+}
+
+/* Style pour le menu */
+.menu {
+  background-color: #333;
+  padding: 10px;
+}
+
+.menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+.menu ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.menu ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Styles for the header */
+header {
+  background-color: #333; /* Couleur de fond */
+  color: #fff; /* Couleur du texte */
+  padding: 10px 0; /* Espacement intérieur */
+}
+
+/* Styles for the navigation menu */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px; /* Largeur maximale */
+  margin: 0 auto; /* Centrer horizontalement */
+  padding: 0 20px; /* Espacement intérieur */
+}
+
+.nav-menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.nav-item {
+  margin-right: 20px; /* Espacement entre les éléments */
+}
+
+.nav-item a {
+  color: #fff; /* Couleur du texte */
+  text-decoration: none; /* Suppression des soulignements */
+  transition: color 0.3s ease; /* Animation de transition */
+}
+
+.nav-item a:hover {
+  color: #ffcc00; /* Couleur du texte au survol */
+}
+.filters {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 200px;
+}
+
+.filters button {
+  width: 100px;
+}
+
+.active {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  margin: -3px -8px 0 -8px;
+  padding-bottom: 5px;
+  padding: 0 8px 5px 8px;
+  color: #444;
+  border-bottom: 2px solid #e51e1e;
+  text-decoration: none;
+}
+
+/* Effet de survol pour le bouton Ajouter au panier */
+.cta.add-to-cart {
+  background-color: #4CAF50; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  border: none; /* Supprimer les bordures */
+  padding: 10px 20px; /* Ajouter un peu de marge interne */
+  text-align: center; /* Centrer le texte */
+  text-decoration: none; /* Supprimer la décoration du lien */
+  display: inline-block;
+  font-size: 16px; /* Taille du texte */
+  margin: 4px 2px;
+  transition-duration: 0.4s; /* Durée de transition */
+  cursor: pointer; /* Curseur pointeur */
+}
+
+.cta.add-to-cart:hover {
+  background-color: #45a049; /* Changement de couleur au survol */
+}
+
+/* Effet de survol pour le bouton Acheter */
+.cta.buy-now {
+  background-color: #008CBA; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  border: none; /* Supprimer les bordures */
+  padding: 10px 20px; /* Ajouter un peu de marge interne */
+  text-align: center; /* Centrer le texte */
+  text-decoration: none; /* Supprimer la décoration du lien */
+  display: inline-block;
+  font-size: 16px; /* Taille du texte */
+  margin: 4px 2px;
+  transition-duration: 0.4s; /* Durée de transition */
+  cursor: pointer; /* Curseur pointeur */
+}
+
+.cta.buy-now:hover {
+  background-color: #005f75; /* Changement de couleur au survol */
+}
+.star {
+  font-size: 24px; /* Taille des étoiles */
+  cursor: pointer; /* Curseur de la souris */
+}
+
+.star.filled {
+  color: gold; /* Couleur des étoiles remplies */
+}
+
+.custom-button {
+  /* Ajoutez vos styles personnalisés ici */
+  background-color: black; /* Couleur de fond */
+  color: #fff; /* Couleur du texte */
+  border: none; /* Supprimez la bordure */
+  padding: 8px 16px; /* Ajoutez un padding */
+  border-radius: 4px; /* Ajoutez une bordure arrondie */
+  cursor: pointer; /* Changez le curseur au survol */
+  transition: background-color 0.3s ease; /* Ajoutez une transition douce */
+}
+
+.custom-button:hover {
+  background-color: gray; /* Changez la couleur de fond au survol */
+}
+
+/* Style pour les produits avec une quantité faible */
+.low-quantity .card {
+  border-color: red; /* Couleur de bordure rouge pour les produits avec un faible stock */
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* Ajoute une ombre rouge pour mettre en évidence */
+  font-weight: bold;
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+      opacity: 0;
+  }
+  50% {
+      opacity: 1;
+  }
+}
+
+.fade-in-out {
+  animation: fadeInOut 10s infinite;
+}
+
+.fade-in-out:nth-child(2) {
+  animation-delay: 5s; /* Démarre l'animation de la deuxième image après 5 secondes */
+}
+
+.absolute-img {
+  position: absolute;
+  top: 10px; /* Espacement en haut */
+  left: 10px; /* Marge à gauche */
+  right: 10px; /* Marge à droite */
+  bottom: 10px; /* Espacement en bas */
+  width: calc(100% - 20px); /* Largeur - marges gauche et droite */
+  height: calc(100% - 20px); /* Hauteur - espaces haut et bas */
+}
+
+
+.bg-primary {
+  background: linear-gradient(to right, #ff9966, #ff5e62); /* Dégradé de couleur */
+  color: white; /* Couleur du texte */
+}
+
+
+.typing-animation {
+  font-family: "Times New Roman", Times, serif; 
+  overflow: hidden; /* Pour cacher le texte dépassant de la zone */
+  border-right: .15em solid orange; /* Effet de curseur de saisie */
+  white-space: nowrap; /* Pour éviter le saut de ligne */
+  margin: 0 auto; /* Centrer le texte */
+  letter-spacing: .15em; /* Espace entre les lettres */
+  left: 50%;
+ animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; /* Animation de saisie */
+}
+
+/* Animation de saisie */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* Animation de clignotement du curseur */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange }
+}
+
+
+
+.category-btn {
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 50px; /* Adjust this value to your preference */
+  transition: background-color 0.3s ease;
+}
+
+.category-btn:active,
+.category-btn:focus {
+  background-color: #007bff; /* Change to your desired color */
+  color: #fff;
+  border: 2px solid #007bff;
+  
+}
+
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-info {
+  margin: 0 10px;
+}
+
+.card {
+  max-width: 240px; /* Ajustez la largeur selon vos besoins */
+  margin: 20px auto; /* Centre et espace les cartes */
+}
+
+.card-img-top {
+  width: 100%;
+  height: auto; /* Permet à l'image de s'adapter à la largeur du conteneur */
+  object-fit: contain; /* Assure que l'image s'ajuste entièrement dans le conteneur */
+}
+
+
+.max-width-btn {
+  max-width: 100px; /* Ajustez cette valeur selon vos besoins */
+}

@@ -1,0 +1,248 @@
+<div class="container-fluid px-0">
+  <app-header></app-header>
+  <br><br>
+  <div class="bg-primary py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <br><br>
+          <h1>
+            Best products & <br />
+            brands in our store
+          </h1>
+          <p>
+            Trendy Products, Factory Prices, Excellent Service
+          </p>
+          <button routerLink="/home" type="button" class="btn btn-outline-light mr-4">
+            Learn more
+          </button>
+          <span class="mx-2"></span>
+          <button type="button" class="btn btn-light shadow-0 text-primary pt-2 border border-white" (click)="scrollToProductDisplay()">
+            <span class="pt-1">Purchase now</span>
+          </button>
+        </div>
+        <div class="col-lg-4 position-relative">
+          <div class="spacer"></div>
+          <img src="/assets/images/pub1.jpg" alt="Image 1" class="img-fluid fade-in-out absolute-img">
+          <img src="/assets/images/pub2.jpg" alt="Image 2" class="img-fluid fade-in-out absolute-img">
+          <!-- Ajoutez autant d'images que nécessaire -->
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="categories py-3">
+    <div class="container">
+     
+      <div class="d-flex flex-wrap">
+        <a routerLink="/catalog" [queryParams]="{filter:'phone'}" routerLinkActive="active" class="btn btn-outline-primary m-2 category-btn"> Smart Phone </a>
+        <a routerLink="/catalog" [queryParams]="{filter:'tablet'}" routerLinkActive="active" class="btn btn-outline-primary m-2 category-btn"> Tablet </a>
+        <a routerLink="/catalog" [queryParams]="{filter:'smarttv'}" routerLinkActive="active" class="btn btn-outline-primary m-2 category-btn"> Smart TV </a>
+        <a routerLink="/catalog" [queryParams]="{filter:'camera'}" routerLinkActive="active" class="btn btn-outline-primary m-2 category-btn"> Camera </a>
+        <a routerLink="/catalog" [queryParams]="{filter:'watch'}" routerLinkActive="active" class="btn btn-outline-primary m-2 category-btn"> Watch </a>
+        <a routerLink="/catalog" [queryParams]="{filter:'headphone'}" routerLinkActive="active" class="btn btn-outline-primary m-2 category-btn"> Headphones </a>
+        <a routerLink="/catalog" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="btn btn-outline-primary m-2 category-btn max-width-btn"> All </a>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  <!--div class="filters">
+    <a routerLink="/catalog" [queryParams]="{filter:'phone'}" routerLinkActive="active" class="button"> Smart Phone </a>
+    <a routerLink="/catalog" [queryParams]="{filter:'tablet'}" routerLinkActive="active" class="button"> Tablet </a>
+    <a routerLink="/catalog" [queryParams]="{filter:'smarttv'}" routerLinkActive="active" class="button"> Smart TV </a>
+    <a routerLink="/catalog" [queryParams]="{filter:'camera'}" routerLinkActive="active" class="button"> Camera </a>
+    <a routerLink="/catalog" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="button"> All </a>
+  </div-->
+  <h3 class="typing-animation">     Les Produits disponibles avec de haute qualité :</h3><br>
+  <div *ngIf="updateSuccessMessage" class="alert alert-success" role="alert">
+    {{ updateSuccessMessage }}
+  </div>
+  <!-- Intégration du spinner de chargement -->
+  <div class="text-center w-100" *ngIf="loading">
+    <app-spinner></app-spinner>
+  </div>
+  <div id="product-display" class="products row" *ngIf="!loading">
+    <ng-container *ngFor="let product of getPaginatedProducts()">
+      <div [ngClass]="{'low-quantity': product.quantity <= 3}" *ngIf="product.quantity > 0" class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card w-100 my-2 shadow-2-strong">
+          <img [src]="product.imagePath" class="card-img-top" style="aspect-ratio: 1 / 1" alt="{{ product.name }}" />
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title" style="font-weight: bold">{{ product.name }}</h5>
+            <p class="card-text">{{ product.title }}</p>
+            <p class="card-text" style="font-weight: bold">{{ product.price | currency:"":"" }} DH</p>
+         <button class="more-details-cta custom-button" (click)="viewProductDetails(product)">
+  <i class="far fa-eye"></i>
+Show More
+</button>
+<br>
+<button *ngIf="user && user.userType === 'Admin'" class="btn btn-warning shadow-0 me-1" data-bs-toggle="modal" data-bs-target="#editProductModal" (click)="selectProduct(product)">
+  <i class="fas fa-edit"></i> Edit
+</button>
+
+<div class="description" *ngIf="product.showDescription">
+             
+ </div>
+            <div class="rating">
+              <span class="star" [ngClass]="{'filled': i < product.rating}" *ngFor="let i of [1, 2, 3, 4, 5]" (click)="rateProduct(product, i)">&#9733;</span>
+            </div>
+            <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
+              <button routerLink="/cart" class="btn btn-primary shadow-0 me-1" *ngIf="user; else signIn" (click)="addToCart(product)">Add To Cart</button>
+              <ng-template #signIn>
+                <button class="btn btn-primary shadow-0 me-1" [routerLink]="'/signin'">Add To Cart</button>
+              </ng-template>
+              
+              <button class="btn btn-light border px-2 pt-2 icon-hover"><i class="fas fa-heart fa-lg text-secondary px-1" (click)="toggleLike(product)"></i></button>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+             
+            </div>
+            <div class="modal-body">
+              <form *ngIf="selectedProduct" (submit)="editProduct() ">
+                <div class="form-group">
+                  <label for="editName">Name</label>
+                  <input type="text" class="form-control" id="editName" [(ngModel)]="selectedProduct.name" name="editName" required>
+                </div>
+                <div class="form-group">
+                  <label for="editTitle">Title</label>
+                  <input type="text" class="form-control" id="editTitle" [(ngModel)]="selectedProduct.title" name="editTitle" required>
+                </div>
+                <div class="form-group">
+                  <label for="editQuantity">Quantity</label>
+                  <input type="number" class="form-control" id="editQuantity" [(ngModel)]="selectedProduct.quantity" name="editQuantity" required>
+                </div>
+                <div class="form-group">
+                  <label for="editPrice">Price</label>
+                  <input type="number" class="form-control" id="editPrice" [(ngModel)]="selectedProduct.price" name="editPrice" required>
+                </div>
+                <div class="form-group">
+                  <label for="editCategory">Category</label>
+                  <input type="text" class="form-control" id="editCategory" [(ngModel)]="selectedProduct.category" name="editCategory" required>
+                </div>
+                <div class="form-group">
+                  <label for="editDetails">Details</label>
+                  <textarea class="form-control" id="editDetails" [(ngModel)]="selectedProduct.details" name="editDetails" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="editImagePath">Image Path</label>
+                  <input type="text" class="form-control" id="editImagePath" [(ngModel)]="selectedProduct.imagePath" name="editImagePath" required>
+                </div>
+                <div class="form-group">
+                  <label for="editRating">Rating</label>
+                  <input type="number" class="form-control" id="editRating" [(ngModel)]="selectedProduct.rating" name="editRating" required>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Save Changes</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      
+              </div>
+              
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <!-- Boutons de pagination -->
+<div class="pagination-container">
+  <button class="btn btn-primary" (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+  <span class="pagination-info">{{ currentPage }} / {{ totalPages }}</span>
+  <button class="btn btn-primary" (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+</div>
+
+  </div>
+
+  <!--app-product-details-component [product]="selectedProduct" [showDetailsButton]="false" *ngIf="selectedProduct"></app-product-details-component-->
+
+</div>
+<br><br>
+<!-- Conteneur pour centrer l'image -->
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <!-- Image -->
+  <img src="/assets/images/smart_watch.jpg" alt="Description de l'image" width="600" height="500">
+</div>
+
+<footer class="text-center text-lg-start text-white" style="background-color: #45526e; padding-top: 20px; padding-bottom: 20px;">
+  <!-- Grid container -->
+  <div class="container p-4 pb-0">
+      <!-- Section: Links -->
+      <section class="">
+          <!--Grid row-->
+          <div class="row">
+              <!-- Grid column -->
+              <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-1">
+                  <h6 class="text-uppercase mb-3 font-weight-bold">ElectroHive</h6>
+                  <p class="p-2">Welcome to ElectroHive, your one-stop destination for all your electronic needs. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-1">
+                  <h6 class="text-uppercase mb-3 font-weight-bold">Products</h6>
+                  <p class="p-2"><a href="#" class="text-white">Smartphones</a></p>
+                  <p class="p-2"><a href="#" class="text-white">Laptops</a></p>
+                  <p class="p-2"><a href="#" class="text-white">Televisions</a></p>
+                  <p class="p-2"><a href="#" class="text-white">Accessories</a></p>
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-1">
+                  <h6 class="text-uppercase mb-3 font-weight-bold">Useful links</h6>
+                  <p class="p-2"><a href="#" class="text-white">Your Account</a></p>
+                  <p class="p-2"><a href="#" class="text-white">Track Orders</a></p>
+                  <p class="p-2"><a href="#" class="text-white">Shipping Information</a></p>
+                  <p class="p-2"><a href="#" class="text-white">Customer Service</a></p>
+              </div>
+
+              <!-- Grid column -->
+              <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-1">
+                  <h6 class="text-uppercase mb-3 font-weight-bold">Contact</h6>
+                  <p class="p-2"><i class="fas fa-home mr-2"></i> Maroc, MA 10012, MS</p>
+                  <p class="p-2"><i class="fas fa-envelope mr-2"></i> info&commat;electrohive.com</p>
+                  <p class="p-2"><i class="fas fa-phone mr-2"></i> +212 234 567 88</p>
+                  <p class="p-2"><i class="fas fa-print mr-2"></i> +212 234 567 89</p>
+              </div>
+              <!-- Grid column -->
+          </div>
+          <!--Grid row-->
+      </section>
+      <!-- Section: Links -->
+  </div>
+  <!-- Grid container -->
+  <hr class="my-3">
+  <!-- Section: Copyright -->
+  <section class="p-3 pt-0">
+      <div class="row d-flex align-items-center">
+          <!-- Grid column -->
+          <div class="col-md-7 col-lg-8 text-center text-md-start">
+              <!-- Copyright -->
+              <div class="p-3">
+                  © 2024 ElectroHive. All rights reserved. <br>Designed and developed by <a href="https://yourwebsite.com" class="text-white">Your Company</a>
+              </div>
+              <!-- Copyright -->
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+              <!-- Social media links -->
+              <a href="#" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-google"></i></a>
+              <a href="#" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-instagram"></i></a>
+          </div>
+          <!-- Grid column -->
+      </div>
+  </section>
+  <!-- Section: Copyright -->
+</footer>

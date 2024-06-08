@@ -1,0 +1,241 @@
+<!-- cart.component.html -->
+<app-header></app-header>
+<br>
+<div class="container">
+<div class="px-4 px-lg-0">
+  <div class="container text-dark py-5 text-center"> <!-- Changement de text-white à text-dark -->
+    <br><br><br><h1 class="display-4">Your Shopping Cart</h1>
+    <p class="lead mb-0">Explore our curated collection and add your favorite items to your shopping cart.</p>
+    <p class="lead">Powered by <a href="#" class="text-dark font-italic"><u><img src="/assets/icone/cerato-1.png" alt="Icon" class="menu-icon"></u></a></p>
+    
+<br><br>
+  <!-- End -->
+ 
+  <div class="pb-5">
+   
+      <div class="row">
+        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+
+          <!-- Shopping cart table -->
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col" class="border-0 bg-light">
+          <div class="p-2 px-3 text-uppercase">Product</div>
+        </th>
+        <th scope="col" class="border-0 bg-light">
+          <div class="py-2 text-uppercase">Price</div>
+        </th>
+        <th scope="col" class="border-0 bg-light">
+          <div class="py-2 text-uppercase">Selected Quantity</div>
+        </th>
+        <th scope="col" class="border-0 bg-light">
+          <div class="py-2 text-uppercase">Total</div>
+        </th>
+        <th scope="col" class="border-0 bg-light">
+          <div class="py-2 text-uppercase">Remove</div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let user of users">
+        <tr *ngFor="let product of user.cart">
+          <td class="border-0">
+            <div class="p-2">
+              <img [src]="product.imagePath" alt="" width="70" class="img-fluid rounded shadow-sm">
+              <div class="ml-3 d-inline-block align-middle">
+                <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">{{ product.title }}</a></h5>
+                <span class="text-muted font-weight-normal font-italic d-block">Category: {{ product.category }}</span>
+              </div>
+            </div>
+          </td>
+          <td class="border-0 align-middle"><strong>{{ product.price }}</strong></td>
+          <td class="border-0 align-middle">
+            <input type="number" class="form-control form-control-lg text-center" [(ngModel)]="product.selectedQuantity" (ngModelChange)="updateQuantity(product._id, product.selectedQuantity)">
+          </td>
+          <td class="border-0 align-middle"><strong>{{ product.price * product.selectedQuantity }}</strong></td>
+          <td class="border-0 align-middle">
+            <a href="/cart" class="text-dark delete-icon" (click)="removeFromCart(product)"><i class="fa fa-trash delete-icon"></i></a>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+
+          <!-- End -->
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12 p-4 bg-white rounded shadow-sm">
+          <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupon code</div>
+          <div class="p-4">
+            <p class="font-italic mb-4">If you have a coupon code, please enter it in the box below</p>
+            <div class="input-group mb-4 border rounded-pill p-2">
+              <input type="text" placeholder="Apply coupon" aria-describedby="button-addon3" class="form-control border-0">
+              <div class="input-group-append border-0">
+                <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Apply coupon</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Instructions for seller</div>
+          <div class="p-4">
+            <p class="font-italic mb-4">If you have some information for the seller you can leave them in the box below</p>
+            <textarea name="" cols="30" rows="2" class="form-control"></textarea>
+          </div>
+
+          <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+          <div class="p-4">
+            <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
+            <ul class="list-unstyled mb-4">
+              <li class="d-flex justify-content-between py-3 border-bottom bg-light">
+                <strong class="text-uppercase pl-3">Product</strong>
+               
+                <strong class="text-uppercase ml-auto pr-4">Subtotal</strong>
+              </li>
+              
+              <ng-container *ngFor="let user of users">
+                <ng-container *ngFor="let product of user.cart">
+                  <li class="d-flex justify-content-between py-3 border-bottom">
+                    <strong class="text-muted pl-3">{{ product.title }} (x{{ product.selectedQuantity }})</strong>
+                    <strong class="ml-auto pr-4">{{ product.price * product.selectedQuantity }}</strong>
+                  </li>
+                </ng-container>
+              </ng-container>
+    
+             <!-- Total Row -->
+           
+    <li class="d-flex justify-content-between py-3 border-bottom bg-light">
+      <strong class="text-uppercase pl-3">Total</strong>
+      <h5 class="font-weight-bold ml-auto pr-4">{{ calculateTotal() }}</h5>
+    </li>
+  </ul>
+
+ <!-- cart.component.html -->
+
+<!-- Formulaire pour l'adresse de livraison -->
+<form>
+  <!-- Champ pour la rue -->
+  <div class="form-group">
+    <label for="street">Street:</label>
+    <input type="text" class="form-control" id="street" [(ngModel)]="address.street" name="street" placeholder="Enter street">
+  </div>
+  <!-- Champ pour la ville -->
+  <div class="form-group">
+    <label for="city">City:</label>
+    <input type="text" class="form-control" id="city" [(ngModel)]="address.city" name="city" placeholder="Enter city">
+  </div>
+  <!-- Champ pour l'état -->
+  <div class="form-group">
+    <label for="state">State:</label>
+    <input type="text" class="form-control" id="state" [(ngModel)]="address.state" name="state" placeholder="Enter state">
+  </div>
+  <!-- Champ pour le code postal -->
+  <div class="form-group">
+    <label for="zip">Zip Code:</label>
+    <input type="text" class="form-control" id="zip" [(ngModel)]="address.zip" name="zip" placeholder="Enter zip code">
+  </div>
+  <!-- Champ pour le pays -->
+  <div class="form-group">
+    <label for="country">Country:</label>
+    <input type="text" class="form-control" id="country" [(ngModel)]="address.country" name="country" placeholder="Enter country">
+  </div>
+</form>
+
+
+<br>
+  <img src="assets/img/credit/paypal.png" alt="Paypal" class="img-fluid credit-card-image">
+    <img src="assets/img/credit/visa.png" alt="Visa" class="img-fluid credit-card-image">
+<br><br><br>
+
+<!-- Bouton pour passer la commande -->
+<a class="btn btn-dark rounded-pill py-2 btn-block mx-2" (click)="passerCommande()">Proceed to checkout</a>
+<div *ngIf="messageSucces" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+  {{ messageSucces }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+         <a href="#" class="btn btn-secondary rounded-pill py-2 btn-block">Update Cart</a>
+         <!-- Message de succès -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container p-4 pb-0">
+    <!-- Section: Links -->
+    <section class="">
+        <!--Grid row-->
+        <div class="row">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-1">
+                <h6 class="text-uppercase mb-3 font-weight-bold">ElectroHive</h6>
+                <p class="p-2">Welcome to ElectroHive, your one-stop destination for all your electronic needs. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-1">
+                <h6 class="text-uppercase mb-3 font-weight-bold">Products</h6>
+                <p class="p-2"><a href="#" class="text-white">Smartphones</a></p>
+                <p class="p-2"><a href="#" class="text-white">Laptops</a></p>
+                <p class="p-2"><a href="#" class="text-white">Televisions</a></p>
+                <p class="p-2"><a href="#" class="text-white">Accessories</a></p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-1">
+                <h6 class="text-uppercase mb-3 font-weight-bold">Useful links</h6>
+                <p class="p-2"><a href="#" class="text-white">Your Account</a></p>
+                <p class="p-2"><a href="#" class="text-white">Track Orders</a></p>
+                <p class="p-2"><a href="#" class="text-white">Shipping Information</a></p>
+                <p class="p-2"><a href="#" class="text-white">Customer Service</a></p>
+            </div>
+
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-1">
+                <h6 class="text-uppercase mb-3 font-weight-bold">Contact</h6>
+                <p class="p-2"><i class="fas fa-home mr-2"></i> Maroc, MA 10012, MS</p>
+                <p class="p-2"><i class="fas fa-envelope mr-2"></i> info&commat;electrohive.com</p>
+                <p class="p-2"><i class="fas fa-phone mr-2"></i> +212 234 567 88</p>
+                <p class="p-2"><i class="fas fa-print mr-2"></i> +212 234 567 89</p>
+            </div>
+            <!-- Grid column -->
+        </div>
+        <!--Grid row-->
+    </section>
+    <!-- Section: Links -->
+</div>
+<!-- Grid container -->
+<hr class="my-3">
+<!-- Section: Copyright -->
+<section class="p-3 pt-0">
+    <div class="row d-flex align-items-center">
+        <!-- Grid column -->
+        <div class="col-md-7 col-lg-8 text-center text-md-start">
+            <!-- Copyright -->
+            <div class="p-3">
+                © 2024 ElectroHive. All rights reserved. <br>Designed and developed by <a href="https://yourwebsite.com" class="text-white">Your Company</a>
+            </div>
+            <!-- Copyright -->
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+            <!-- Social media links -->
+            <a href="#" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-google"></i></a>
+            <a href="#" class="btn btn-outline-light btn-floating m-1"><i class="fab fa-instagram"></i></a>
+        </div>
+        <!-- Grid column -->
+    </div>
+</section>
+<!-- Section: Copyright -->
+</div>
+

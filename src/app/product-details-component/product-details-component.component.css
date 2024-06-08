@@ -1,0 +1,108 @@
+/* product-details-component.component.css */
+
+.product-details {
+  margin: 20px;
+  border: 1px solid #e0e0e0; /* Ajouter une bordure */
+  border-radius: 5px; /* Ajouter une bordure arrondie */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajouter une ombre */
+  padding: 20px;
+  background-color: #ffffff; /* Couleur de fond */
+}
+
+.product-info {
+  display: flex;
+  align-items: flex-start;
+}
+
+.product-image {
+  flex: 1;
+}
+
+.product-image img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease; /* Ajouter une transition */
+}
+
+.product-image img:hover {
+  transform: scale(1.05); /* Zoom au survol */
+}
+
+.product-description {
+  flex: 2; /* Augmenter la largeur de la description */
+  padding-left: 20px;
+}
+
+.product-description h5 {
+  font-size: 1.5em; /* Taille de police plus grande */
+  font-weight: bold;
+  color: #333333; /* Couleur du texte */
+}
+
+.product-description p {
+  margin-bottom: 10px;
+  line-height: 1.4; /* Espacement des lignes plus grand */
+  font-size: 1.2em; /* Taille de police plus grande */
+}
+
+.btn {
+  margin-right: 10px;
+}
+
+.modal-dialog {
+  max-width: 500px;
+}
+
+
+/* product-details-component.component.css */
+
+.comment-section {
+  margin-top: 20px;
+}
+
+.comment-section h3 {
+  margin-bottom: 10px;
+}
+
+.comment-section textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.comment-section button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.comment-section button:hover {
+  background-color: #0056b3;
+}
+.star {
+  font-size: 24px; /* Taille des étoiles */
+  cursor: pointer; /* Curseur de la souris */
+}
+
+.star.filled {
+  color: gold; /* Couleur des étoiles remplies */
+}
+
+/* Dans votre fichier CSS global ou dans le fichier de style spécifique à ce composant */
+app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Assurez-vous que le z-index est supérieur à celui des autres éléments de la page */
+}
+
+

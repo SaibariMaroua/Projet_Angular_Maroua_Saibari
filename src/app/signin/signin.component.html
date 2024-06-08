@@ -1,0 +1,116 @@
+<!-- Remplacez tout le contenu existant du fichier "signin.component.html" par le code suivant -->
+ 
+<div class="background-image">
+<div class="main">
+  <input type="checkbox" id="chk" aria-hidden="true">
+
+  <div class="login">
+    <div class="signup-content">
+    <form #signInForm="ngForm" class="form signin-form" (ngSubmit)="signIn()">
+      <label for="chk" aria-hidden="true">Login</label>
+      <div class="form-group">
+        <input 
+          name="email" 
+          required 
+          email 
+          #email="ngModel" 
+          [(ngModel)]="credentials.email" 
+          placeholder="Email Address" 
+          type="text" />
+        <em class="error" *ngIf="email.errors?.['required'] && email.touched">Email is required</em>
+        <em class="error" *ngIf="email.errors?.['email'] && email.touched">Must be a valid email format</em>
+      </div>
+      <div class="form-group">
+        <input 
+          name="password" 
+          required 
+          #password="ngModel" 
+          [(ngModel)]="credentials.password" 
+          placeholder="Password" 
+          type="password" />
+        <em class="error" *ngIf="password.invalid && password.touched">Password is required</em>
+        
+      </div>
+      <div class="buttons">
+        <button 
+          type="submit" 
+          [disabled]="signInForm.form.invalid" 
+          class="button cta">
+          Sign In
+        </button>
+      </div>
+      <div class="error" *ngIf="signInError">
+        Sign In Error !!. Please try again.
+      </div>
+    </form>
+   </div>
+  </div>
+
+  <div class="signup">
+    <form (ngSubmit)="register()">
+      <label for="chk" aria-hidden="true">Sign up</label>
+      <input type="text" name="firstName" placeholder="First Name" [(ngModel)]="firstName" required>
+      <input type="text" name="lastName" placeholder="Last Name"  [(ngModel)]="lastName" required>
+      <input type="tel" name="tel" placeholder="Phone Number" [(ngModel)]="tel" required>
+      <input type="email" name="email" placeholder="Email"  [(ngModel)]="credentials.email" required>
+      <input type="password" name="password" placeholder="Password" [(ngModel)]="credentials.password" required>
+      
+      <select name="userType" [(ngModel)]="credentials.userType" required>
+        <option [ngValue]="UserType.Client">Client</option>
+        <option [ngValue]="UserType.Admin">Admin</option>
+        <option [ngValue]="UserType.Guest">Guest</option>
+      </select>
+      <div class="error" *ngIf="registrationError">{{ registrationError }}</div>
+      <!-- Utilisation de *ngIf pour afficher le message de succès si registrationSuccess est vrai -->
+      <div class="success" *ngIf="registrationSuccess">Registration successful!</div>
+      <button type="submit">Sign up</button>
+      
+     
+    </form>
+  </div>
+  
+  
+</div>
+</div>
+
+
+
+
+<!--header>
+  <nav class="navbar">
+    <ul class="nav-menu">
+      <div class="nav-brand">
+        <i class="fas fa-store"></i>
+        <a href="#">Shopping</a>
+      </div>
+      <i class="fas fa-home"></i> <li class="nav-item"><a href="#">Home</a></li>
+      <li class="nav-item"><a href="#">Cart</a></li>
+      <li class="nav-item"><a href="#">Catalog</a></li>
+ 
+    </ul>
+  </nav>
+</header>
+<br><br>
+<div class="signin-form">
+  <h2>Sign In</h2>
+  <form (ngSubmit)="signin()">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" required>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" [(ngModel)]="email" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" [(ngModel)]="password" required>
+    </div>
+    <button type="submit">Sign In</button>
+    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </form>
+</div-->

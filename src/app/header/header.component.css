@@ -1,0 +1,162 @@
+/* Styles pour l'en-tête */
+header {
+  background-color: #333; /* Couleur de fond */
+  color: #fff; /* Couleur du texte */
+  padding: 10px 0; /* Espacement intérieur */
+  position: relative; /* Position relative pour positionner le logo de profil */
+  position: fixed; width: 100%; z-index: 100;
+  font-size: 16px;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Styles pour le menu de navigation */
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Les éléments seront alignés aux extrémités */
+  align-items: center;
+  max-width: 100%; /* Largeur maximale */
+  margin: 0 auto; /* Centrage horizontal */
+  padding: 0 20px; /* Espacement intérieur */
+  height: 90px; 
+  width: 100%;
+
+}
+
+.nav-menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center; 
+  font-size: 20px;
+}
+
+.nav-item {
+  margin-left: 2px;
+}
+
+.nav-item:first-child {
+  margin-left: 0; /* Pas de marge pour le premier élément */
+}
+/* Ajouter une marge à droite uniquement pour les éléments sauf le dernier */
+.nav-item:not(:last-child) {
+  margin-right: 3px;
+}
+
+.nav-item a {
+  color: #fff; /* Couleur du texte */
+  text-decoration: none; /* Suppression des soulignements */
+  transition: color 0.3s ease; /* Animation de transition */
+  padding: 5px 10px; /* Réduit l'espacement à l'intérieur des liens */
+  border-radius: 4px; /* Coins arrondis */
+  font-size: 25px; /* Ajoute la taille de la police */
+  
+}
+
+.nav-item a:hover {
+  color: #ffcc00; /* Couleur du texte au survol */
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.menu-icon {
+  float: left;
+  margin-left: none;
+  margin-right: 2px; /* Ajoute un espacement à droite de l'image */
+  width: 170px; /* Ajuste la largeur de l'image selon vos besoins */
+  height: 60px; /* Permet à la hauteur de l'image de s'ajuster automatiquement en conservant les proportions */
+}
+
+.sign-out {
+  position: absolute;
+  top: calc(100% + 10px); /* Positionne le menu juste en dessous de l'image du profil */
+  left: 0; /* Aligner le menu de déconnexion avec l'image du profil */
+  background-color: #fff; /* Fond blanc pour le menu de déconnexion */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère pour le menu */
+  border-radius: 4px; /* Coins arrondis pour le menu */
+  padding: 10px; /* Espacement intérieur du menu */
+  display: none; /* Masquer initialement le menu de déconnexion */
+}
+
+/* Affichez le menu de déconnexion lorsqu'il est actif */
+.sign-out.active {
+  display: block;
+}
+
+.logo {
+  height: 40px; /* Ajustez la hauteur du logo selon vos besoins */
+  position: absolute; /* Positionnez le logo de profil par rapport à son conteneur parent */
+  top: 50%; /* Positionnez le logo de profil verticalement au centre */
+  transform: translateY(-50%); /* Ajustez la position verticale du logo de profil */
+  /* Ajoutez un espacement à gauche */
+}
+
+.profile-link {
+  display: inline-block; /* Permet à l'élément <a> de prendre la taille de son contenu */
+  margin-right: 50px; /* Ajoute un espace de 10 pixels à droite de l'icône de profil */
+}
+
+.logo {
+  height: 60px; /* Ajustez la hauteur du logo selon vos besoins */
+  /* position, top et transform non nécessaires si l'élément parent a une hauteur définie */
+}
+
+
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.search-form input[type="text"] {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 20px;
+  margin-right: 5px; /* Ajoute un espace entre les inputs */
+}
+
+.search-form button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 14px 20px;
+  
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Ajoute un effet de transition */
+}
+
+.search-form button:hover {
+  background-color: #ffcc00; /* Change la couleur de fond au survol */
+}
+.profile-initials {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #007bff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-initials:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.profile-link {
+  text-decoration: none;
+}
+
+.profile-initials::before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}

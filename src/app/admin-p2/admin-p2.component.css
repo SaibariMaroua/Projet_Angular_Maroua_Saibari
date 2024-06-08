@@ -1,0 +1,38 @@
+.product-image {
+    width: 150px; /* Définissez la largeur souhaitée */
+    height: auto; /* Laissez la hauteur s'ajuster automatiquement pour maintenir le rapport hauteur-largeur de l'image */
+}
+#dashboard-v1-table {
+    display: none;
+  }
+
+  /* Couleur de fond du menu principal */
+.main-sidebar {
+    background-color: #34495e; /* Gris foncé */
+  }
+  
+  /* Couleur du texte du menu */
+  .nav-sidebar .nav-link {
+    color: #ffffff; /* Blanc */
+  }
+  
+  /* Couleur de fond des éléments de menu actifs */
+  .nav-sidebar .nav-treeview>.nav-item>.nav-link.active {
+    background-color: #2980b9; /* Bleu */
+  }
+  
+  /* Couleur du texte des éléments de menu actifs */
+  .nav-sidebar .nav-treeview>.nav-item>.nav-link.active {
+    color: #ffffff; /* Blanc */
+  }
+  
+  /* Couleur de fond du logo */
+  .brand-link {
+    background-color: #34495e; /* Gris foncé */
+  }
+  
+  /* Couleur du texte du logo */
+  .brand-link .brand-text {
+    color: #ffffff; /* Blanc */
+  }
+  
